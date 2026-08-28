@@ -2,8 +2,13 @@ import { useState } from "react";
 import type { SwatchData, CalculationResult } from "../types/knitting.types";
 import { calculateGauge } from "../utils/calculateGauge";
 import { GaugeResult } from "./GaugeResult";
+import { validateSwatchData } from "../utils/validateSwatchData";
+import { NumberField } from "./NumberField";
 
 export function GaugeCalculatorForm() {
+  // Holds the list of validation error messages (empty = no errors)
+  const [errors, setErrors] = useState<string[]>([]);
+
   // Each input field gets its own piece of state.
   // We store everything as strings because that's what an <input> gives us,
   // even for fields that represent numbers.
@@ -18,40 +23,65 @@ export function GaugeCalculatorForm() {
   const [desiredHeightCm, setDesiredHeightCm] = useState("");
 
   // This state holds the calculation result.
-  // It starts as `null` because there's no result until the user clicks "Calculate".
-  // The generic <CalculationResult | null> tells TypeScript this state can be
-  // either a CalculationResult object OR null — nothing else.
+  // It also doubles as our "which screen to show" flag:
+  // null = show the form, not null = show the result screen.
   const [result, setResult] = useState<CalculationResult | null>(null);
 
   // This function runs when the user clicks the "Calculate" button.
-  // It's the "bridge" between the UI (strings from inputs) and the pure
-  // calculation logic (which expects numbers).
   function handleSubmit() {
     const data: SwatchData = {
       projectName,
-      // Number(...) converts the string from the input into an actual number
       swatchStitches: Number(swatchStitches),
       swatchWidthCm: Number(swatchWidthCm),
       desiredWidthCm: Number(desiredWidthCm),
-
-      // For optional fields: only convert to a number if the field isn't empty,
-      // otherwise leave it as `undefined` (matching the `?` in SwatchData)
       swatchRows: swatchRows ? Number(swatchRows) : undefined,
       swatchHeightCm: swatchHeightCm ? Number(swatchHeightCm) : undefined,
       desiredHeightCm: desiredHeightCm ? Number(desiredHeightCm) : undefined,
     };
-    // Call the pure function we already tested manually, and store its result
+
+    const validationErrors = validateSwatchData(data);
+
+    if (validationErrors.length > 0) {
+      setErrors(validationErrors);
+      setResult(null);
+      return;
+    }
+
+    setErrors([]);
     setResult(calculateGauge(data));
   }
 
+  // Clears the result, sending the user back to the form.
+  function handleReset() {
+    setResult(null);
+    setErrors([]);
+    // Reset every form field back to its initial empty value
+    setProjectName("");
+    setSwatchStitches("");
+    setSwatchWidthCm("");
+    setDesiredWidthCm("");
+    setSwatchRows("");
+    setSwatchHeightCm("");
+    setDesiredHeightCm("");
+  }
+
+  // If we already have a result, show only the result screen
+  if (result) {
+    return (
+      <div>
+        <GaugeResult projectName={projectName} result={result} />
+        <button onClick={handleReset}>Start over</button>
+      </div>
+    );
+  }
+
+  // Otherwise, show the form
   return (
     <div>
       <h2>Knitting Gauge Calculator</h2>
 
       <label>
         Project name:
-        {/* onChange fires on every keystroke. e.target.value is the current text.
-            Calling setProjectName triggers a re-render with the new value. */}
         <input
           type="text"
           value={projectName}
@@ -61,68 +91,55 @@ export function GaugeCalculatorForm() {
 
       <h3>Width</h3>
 
-      <label>
-        Gauge stitches
-        <input
-          type="number"
-          value={swatchStitches}
-          onChange={(e) => setSwatchStitches(e.target.value)}
-        />
-      </label>
+      <NumberField
+        label="Gauge stitches"
+        value={swatchStitches}
+        onChange={setSwatchStitches}
+      />
 
-      <label>
-        Gauge width (cm):
-        <input
-          type="number"
-          value={swatchWidthCm}
-          onChange={(e) => setSwatchWidthCm(e.target.value)}
-        />
-      </label>
+      <NumberField
+        label="Gauge width (cm)"
+        value={swatchWidthCm}
+        onChange={setSwatchWidthCm}
+      />
 
-      <label>
-        Desired width (cm):
-        <input
-          type="number"
-          value={desiredWidthCm}
-          onChange={(e) => setDesiredWidthCm(e.target.value)}
-        />
-      </label>
+      <NumberField
+        label="Desired width (cm)"
+        value={desiredWidthCm}
+        onChange={setDesiredWidthCm}
+      />
+
       <h3>Height (optional)</h3>
 
-      <label>
-        Swatch Rows:
-        <input
-          type="number"
-          value={swatchRows}
-          onChange={(e) => setSwatchRows(e.target.value)}
-        />
-      </label>
+      <NumberField
+        label="Swatch rows"
+        value={swatchRows}
+        onChange={setSwatchRows}
+      />
 
-      <label>
-        Swatch Height
-        <input
-          type="number"
-          value={swatchHeightCm}
-          onChange={(e) => setSwatchHeightCm(e.target.value)}
-        />
-      </label>
+      <NumberField
+        label="Swatch height (cm)"
+        value={swatchHeightCm}
+        onChange={setSwatchHeightCm}
+      />
 
-      <label>
-        Desired height (cm):
-        <input
-          type="number"
-          value={desiredHeightCm}
-          onChange={(e) => setDesiredHeightCm(e.target.value)}
-        />
-      </label>
+      <NumberField
+        label="Desired height (cm)"
+        value={desiredHeightCm}
+        onChange={setDesiredHeightCm}
+      />
 
       <button onClick={handleSubmit}>Calculate</button>
 
-      {/* This block only renders if `result` is not null.
-    `&&` here works as a shortcut: if the left side is falsy (null),
-     React skips rendering the right side entirely. */}
-
-      {result && <GaugeResult result={result} />}
+      {/* .map() renders a list of items. React requires a unique "key" prop
+          on each item so it can track which ones changed between renders. */}
+      {errors.length > 0 && (
+        <ul>
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

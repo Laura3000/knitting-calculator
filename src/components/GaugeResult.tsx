@@ -1,17 +1,17 @@
 import type { CalculationResult } from "../types/knitting.types";
 
-// This defines the "shape" of the props this component expects to receive.
-// Think of it like a function's parameter types, but for a component.
 interface GaugeResultProps {
+  projectName: string;
   result: CalculationResult;
 }
 
-export function GaugeResult({ result }: GaugeResultProps) {
+export function GaugeResult({ projectName, result }: GaugeResultProps) {
   return (
     <div>
-      <p>Required Stitches: {result.requiredStitches}</p>
+      <h3>{projectName}</h3>
+      <p>Required stitches: {result.requiredStitches}</p>
       {result.requiredRows !== undefined && (
-        <p>Required Rows: {result.requiredRows}</p>
+        <p>Required rows: {result.requiredRows}</p>
       )}
     </div>
   );
