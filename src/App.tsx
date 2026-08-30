@@ -1,5 +1,5 @@
 import "./App.css";
-import { GaugeCalculatorForm } from "./components/GaugeCalculatorForm";
+import { GaugeCalculatorForm } from "./components/knitting/GaugeCalculatorForm";
 
 function App() {
   return (

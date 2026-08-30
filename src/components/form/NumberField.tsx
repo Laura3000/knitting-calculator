@@ -1,3 +1,5 @@
+import styles from "./NumberField.module.css";
+
 interface NumberFieldProps {
   label: string;
   value: string;
@@ -6,10 +8,11 @@ interface NumberFieldProps {
 
 export function NumberField({ label, value, onChange }: NumberFieldProps) {
   return (
-    <label>
-      {label}
+    <label className={styles.field}>
+      <span className={styles.label}>{label}</span>
       <input
         type="number"
+        className={styles.input}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />

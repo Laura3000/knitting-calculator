@@ -1,0 +1,49 @@
+/* Basic reset: browsers add default margin/padding that we don't want */
+* {
+  box-sizing: border-box;
+}
+
+/* Light theme (default) colors */
+:root {
+  --bg-color: #f4f4f5;
+  --card-bg-color: #e0e0e0;
+  --text-color: #1a1a1a;
+  --border-color: #5c5c5c;
+  --button-bg-color: #b4b4b4;
+  --button-hover-bg-color: #808080;
+  --button-text-color: #000000;
+  --error-color: #c0392b;
+}
+
+/* Dark theme colors — active when <html data-theme="dark"> */
+[data-theme="dark"] {
+  --bg-color: #1e1e1e;
+  --card-bg-color: #2a2a2a;
+  --text-color: #f0f0f0;
+  --border-color: #555555;
+  --button-bg-color: #4a4a4a;
+  --button-hover-bg-color: #656565;
+  --button-text-color: #ffffff;
+  --error-color: #e57373;
+}
+
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  background-color: #f4f4f5;
+  color: #1a1a1a;
+  /* Centers its content (the card) both horizontally and vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  /* Smooth transition when switching themes */
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}

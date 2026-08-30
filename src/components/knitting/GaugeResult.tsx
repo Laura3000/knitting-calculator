@@ -1,4 +1,4 @@
-import type { CalculationResult } from "../types/knitting.types";
+import type { CalculationResult } from "../../types/knitting.types";
 
 interface GaugeResultProps {
   projectName: string;
