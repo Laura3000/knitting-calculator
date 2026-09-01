@@ -24,8 +24,20 @@
   margin-bottom: 1rem;
 }
 
+.materialsRow {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.materialsRow > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
 .button {
   padding: 0.6rem 1.2rem;
+  margin-top: 1rem;
   background-color: var(--button-bg-color);
   color: var(--button-text-color);
   border: none;

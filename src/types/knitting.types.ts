@@ -10,6 +10,10 @@ export interface SwatchData {
   swatchRows?: number;
   swatchHeightCm?: number;
   desiredHeightCm?: number;
+
+  // New: information about the materials used (optional, not used in calculations)
+  yarnName?: string;
+  needleSize?: string;
 }
 
 // Represents the result the calculator will return

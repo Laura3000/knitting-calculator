@@ -20,17 +20,25 @@ export function GaugeCalculatorForm() {
     setSwatchHeightCm,
     desiredHeightCm,
     setDesiredHeightCm,
+    yarnName,
+    setYarnName,
+    needleSize,
+    setNeedleSize,
     errors,
     result,
     handleSubmit,
     handleReset,
   } = useSwatchForm();
-
   // If we already have a result, show only the result screen
   if (result) {
     return (
       <div className={styles.container}>
-        <GaugeResult projectName={projectName} result={result} />
+        <GaugeResult
+          projectName={projectName}
+          result={result}
+          yarnName={yarnName}
+          needleSize={needleSize}
+        />
         <div className={styles.buttonWrapper}>
           <button className={styles.button} onClick={handleReset}>
             Start over
@@ -92,6 +100,16 @@ export function GaugeCalculatorForm() {
           label="Desired height (cm)"
           value={desiredHeightCm}
           onChange={setDesiredHeightCm}
+        />
+      </div>
+
+      <h3>Materials (optional)</h3>
+      <div className={styles.materialsRow}>
+        <TextField label="Yarn" value={yarnName} onChange={setYarnName} />
+        <TextField
+          label="Needle size"
+          value={needleSize}
+          onChange={setNeedleSize}
         />
       </div>
 

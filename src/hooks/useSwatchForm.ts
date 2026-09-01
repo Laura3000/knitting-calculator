@@ -1,16 +1,18 @@
-import { useState } from 'react';
-import type { SwatchData, CalculationResult } from '../types/knitting.types';
-import { calculateGauge } from '../utils/calculateGauge';
-import { validateSwatchData } from '../utils/validateSwatchData';
+import { useState } from "react";
+import type { SwatchData, CalculationResult } from "../types/knitting.types";
+import { calculateGauge } from "../utils/calculateGauge";
+import { validateSwatchData } from "../utils/validateSwatchData";
 
 export function useSwatchForm() {
-  const [projectName, setProjectName] = useState('');
-  const [swatchStitches, setSwatchStitches] = useState('');
-  const [swatchWidthCm, setSwatchWidthCm] = useState('');
-  const [desiredWidthCm, setDesiredWidthCm] = useState('');
-  const [swatchRows, setSwatchRows] = useState('');
-  const [swatchHeightCm, setSwatchHeightCm] = useState('');
-  const [desiredHeightCm, setDesiredHeightCm] = useState('');
+  const [projectName, setProjectName] = useState("");
+  const [swatchStitches, setSwatchStitches] = useState("");
+  const [swatchWidthCm, setSwatchWidthCm] = useState("");
+  const [desiredWidthCm, setDesiredWidthCm] = useState("");
+  const [swatchRows, setSwatchRows] = useState("");
+  const [swatchHeightCm, setSwatchHeightCm] = useState("");
+  const [desiredHeightCm, setDesiredHeightCm] = useState("");
+  const [yarnName, setYarnName] = useState("");
+  const [needleSize, setNeedleSize] = useState("");
 
   const [errors, setErrors] = useState<string[]>([]);
   const [result, setResult] = useState<CalculationResult | null>(null);
@@ -24,6 +26,8 @@ export function useSwatchForm() {
       swatchRows: swatchRows ? Number(swatchRows) : undefined,
       swatchHeightCm: swatchHeightCm ? Number(swatchHeightCm) : undefined,
       desiredHeightCm: desiredHeightCm ? Number(desiredHeightCm) : undefined,
+      yarnName: yarnName || undefined,
+      needleSize: needleSize || undefined,
     };
 
     const validationErrors = validateSwatchData(data);
@@ -41,13 +45,15 @@ export function useSwatchForm() {
   function handleReset() {
     setResult(null);
     setErrors([]);
-    setProjectName('');
-    setSwatchStitches('');
-    setSwatchWidthCm('');
-    setDesiredWidthCm('');
-    setSwatchRows('');
-    setSwatchHeightCm('');
-    setDesiredHeightCm('');
+    setProjectName("");
+    setSwatchStitches("");
+    setSwatchWidthCm("");
+    setDesiredWidthCm("");
+    setSwatchRows("");
+    setSwatchHeightCm("");
+    setDesiredHeightCm("");
+    setYarnName("");
+    setNeedleSize("");
   }
 
   // Everything the component needs, bundled into one object
@@ -66,6 +72,10 @@ export function useSwatchForm() {
     setSwatchHeightCm,
     desiredHeightCm,
     setDesiredHeightCm,
+    yarnName,
+    setYarnName,
+    needleSize,
+    setNeedleSize,
     errors,
     result,
     handleSubmit,
