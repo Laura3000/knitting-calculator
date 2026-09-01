@@ -15,7 +15,7 @@
   border: 1px solid var(--border-color);
   border-radius: 10px;
   font-size: 1rem;
-  background-color: rgb(241, 241, 241);
+  background-color: var(--bg-color);
   color: var(--text-color);
   transition:
     background-color 0.2s,
@@ -25,5 +25,5 @@
 
 .input:focus {
   outline: none;
-  border-color: #a5a5a5;
+  border-color: var(--border-color);
 }

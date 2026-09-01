@@ -6,7 +6,7 @@
 /* Light theme (default) colors */
 :root {
   --bg-color: #f4f4f5;
-  --card-bg-color: #e9e7e7;
+  --card-bg-color: #cfcfcf;
   --text-color: #1a1a1a;
   --border-color: #5c5c5c;
   --button-bg-color: #b4b4b4;
@@ -17,9 +17,9 @@
 
 /* Dark theme colors — active when <html data-theme="dark"> */
 [data-theme="dark"] {
-  --bg-color: #1e1e1e;
+  --bg-color: #646363;
   --card-bg-color: #2a2a2a;
-  --text-color: #f0f0f0;
+  --text-color: #c5c5c5;
   --border-color: #555555;
   --button-bg-color: #4a4a4a;
   --button-hover-bg-color: #656565;
@@ -34,13 +34,8 @@ body {
     -apple-system,
     "Segoe UI",
     sans-serif;
-  background-color: #f4f4f5;
-  color: #1a1a1a;
-  /* Centers its content (the card) both horizontally and vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 
   /* Smooth transition when switching themes */
   transition:
