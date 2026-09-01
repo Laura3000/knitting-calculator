@@ -7,7 +7,7 @@ export function useTheme() {
   // to check if there's already a saved preference in localStorage.
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "dark" ? "dark" : "light";
+    return savedTheme === "light" ? "light" : "dark";
   });
 
   // This effect runs after every render where `theme` has changed
