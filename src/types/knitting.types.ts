@@ -21,3 +21,12 @@ export interface CalculationResult {
   requiredStitches: number;
   requiredRows?: number;
 }
+
+// Represents a full project saved by the user, including the data
+// they entered and the result that was calculated from it.
+export interface SavedProject {
+  id: string;
+  savedAt: string;
+  data: SwatchData;
+  result: CalculationResult;
+}
