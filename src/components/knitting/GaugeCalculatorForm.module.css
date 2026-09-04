@@ -1,8 +1,7 @@
 .container {
   width: 460px;
   max-width: 90vw;
-  min-height: 400px;
-  padding: 2rem;
+  padding: 1.25rem;
   background-color: var(--card-bg-color);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -10,10 +9,12 @@
 
 .container h3 {
   text-align: center;
+  margin: 0.75rem 0 0.5rem;
 }
 
 .container h2 {
   text-align: center;
+  margin: 0 0 1rem;
 }
 
 .row {
@@ -21,13 +22,13 @@
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .materialsRow {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .materialsRow > * {
