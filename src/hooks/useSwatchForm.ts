@@ -17,6 +17,10 @@ export function useSwatchForm() {
   const [errors, setErrors] = useState<string[]>([]);
   const [result, setResult] = useState<CalculationResult | null>(null);
 
+  // Holds the exact SwatchData that produced the current `result`.
+  // We'll need this later if the user decides to save this calculation.
+  const [lastData, setLastData] = useState<SwatchData | null>(null);
+
   function handleSubmit() {
     const data: SwatchData = {
       projectName,
@@ -35,16 +39,19 @@ export function useSwatchForm() {
     if (validationErrors.length > 0) {
       setErrors(validationErrors);
       setResult(null);
+      setLastData(null);
       return;
     }
 
     setErrors([]);
     setResult(calculateGauge(data));
+    setLastData(data);
   }
 
   function handleReset() {
     setResult(null);
     setErrors([]);
+    setLastData(null);
     setProjectName("");
     setSwatchStitches("");
     setSwatchWidthCm("");
@@ -56,7 +63,6 @@ export function useSwatchForm() {
     setNeedleSize("");
   }
 
-  // Everything the component needs, bundled into one object
   return {
     projectName,
     setProjectName,
@@ -78,6 +84,7 @@ export function useSwatchForm() {
     setNeedleSize,
     errors,
     result,
+    lastData,
     handleSubmit,
     handleReset,
   };

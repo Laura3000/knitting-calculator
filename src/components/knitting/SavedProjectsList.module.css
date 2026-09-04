@@ -1,0 +1,42 @@
+.container {
+  width: 460px;
+  max-width: 90vw;
+  padding: 2rem;
+  background-color: var(--card-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s;
+}
+
+.projectCard {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.deleteButton {
+  padding: 0.4rem 0.8rem;
+  background-color: var(--error-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.backButton {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.backButton:hover {
+  background-color: var(--button-hover-bg-color);
+}

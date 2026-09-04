@@ -16,6 +16,7 @@ export function getSavedProjects(): SavedProject[] {
 export function saveProject(project: SavedProject): void {
   const currentProjects = getSavedProjects();
   const updatedProjects = [...currentProjects, project];
+  
   localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedProjects));
 }
 

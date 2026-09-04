@@ -1,10 +1,18 @@
+import { useState } from "react";
+import type { SwatchData, CalculationResult } from "../../types/knitting.types";
 import { GaugeResult } from "./GaugeResult";
 import { NumberField } from "../form/NumberField";
+import { TextField } from "../form/TextField";
 import { useSwatchForm } from "../../hooks/useSwatchForm";
-import { TextField } from "../form/TextFIeld";
 import styles from "./GaugeCalculatorForm.module.css";
 
-export function GaugeCalculatorForm() {
+interface GaugeCalculatorFormProps {
+  onSaveProject: (data: SwatchData, result: CalculationResult) => void;
+}
+
+export function GaugeCalculatorForm({
+  onSaveProject,
+}: GaugeCalculatorFormProps) {
   const {
     projectName,
     setProjectName,
@@ -26,10 +34,28 @@ export function GaugeCalculatorForm() {
     setNeedleSize,
     errors,
     result,
+    lastData,
     handleSubmit,
     handleReset,
   } = useSwatchForm();
-  // If we already have a result, show only the result screen
+
+  // Tracks whether the current result has already been saved,
+  // just so we can show a small confirmation on the button.
+  const [saved, setSaved] = useState(false);
+
+  function handleSave() {
+    if (!lastData || !result) {
+      return;
+    }
+    onSaveProject(lastData, result);
+    setSaved(true);
+  }
+
+  function handleResetAndClearSaved() {
+    setSaved(false);
+    handleReset();
+  }
+
   if (result) {
     return (
       <div className={styles.container}>
@@ -39,8 +65,16 @@ export function GaugeCalculatorForm() {
           yarnName={yarnName}
           needleSize={needleSize}
         />
+
         <div className={styles.buttonWrapper}>
-          <button className={styles.button} onClick={handleReset}>
+          <button
+            className={styles.button}
+            onClick={handleSave}
+            disabled={saved}
+          >
+            {saved ? "Saved!" : "Save project"}
+          </button>
+          <button className={styles.button} onClick={handleResetAndClearSaved}>
             Start over
           </button>
         </div>
@@ -48,7 +82,6 @@ export function GaugeCalculatorForm() {
     );
   }
 
-  // Otherwise, show the form
   return (
     <div className={styles.container}>
       <h2>Knitting Gauge Calculator</h2>
@@ -67,13 +100,11 @@ export function GaugeCalculatorForm() {
           value={swatchStitches}
           onChange={setSwatchStitches}
         />
-
         <NumberField
           label="Gauge width (cm)"
           value={swatchWidthCm}
           onChange={setSwatchWidthCm}
         />
-
         <NumberField
           label="Desired width (cm)"
           value={desiredWidthCm}
@@ -89,13 +120,11 @@ export function GaugeCalculatorForm() {
           value={swatchRows}
           onChange={setSwatchRows}
         />
-
         <NumberField
           label="Swatch height (cm)"
           value={swatchHeightCm}
           onChange={setSwatchHeightCm}
         />
-
         <NumberField
           label="Desired height (cm)"
           value={desiredHeightCm}
@@ -104,8 +133,13 @@ export function GaugeCalculatorForm() {
       </div>
 
       <h3>Materials (optional)</h3>
+
       <div className={styles.materialsRow}>
-        <TextField label="Yarn" value={yarnName} onChange={setYarnName} />
+        <TextField
+          label="Yarn name/brand"
+          value={yarnName}
+          onChange={setYarnName}
+        />
         <TextField
           label="Needle size"
           value={needleSize}
