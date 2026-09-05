@@ -17,12 +17,16 @@
 
 .deleteButton {
   padding: 0.4rem 0.8rem;
-  background-color: var(--error-color);
+  background-color: red;
   color: #ffffff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.875rem;
+}
+
+.deleteButton:hover {
+  background-color: darkred;
 }
 
 .backButton {

@@ -9,10 +9,10 @@
   --card-bg-color: #cfcfcf;
   --text-color: #1a1a1a;
   --border-color: #5c5c5c;
-  --button-bg-color: #71377c;
-  --button-hover-bg-color: #5b2366;
+  --button-bg-color: #c25e77;
+  --button-hover-bg-color: #a84860;
   --button-text-color: #ffffff;
-  --error-color: #ac2213;
+  --error-color: #ac1100;
 }
 
 /* Dark theme colors — active when <html data-theme="dark"> */
@@ -21,8 +21,8 @@
   --card-bg-color: #2a2a2a;
   --text-color: #ffffff;
   --border-color: #555555;
-  --button-bg-color: #71377c;
-  --button-hover-bg-color: #5b2366;
+  --button-bg-color: #c25e77;
+  --button-hover-bg-color: #a84860;
   --button-text-color: #ffffff;
   --error-color: #e57373;
 }
