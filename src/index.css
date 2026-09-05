@@ -13,6 +13,7 @@
   --button-hover-bg-color: #a84860;
   --button-text-color: #ffffff;
   --error-color: #9e2a2b;
+  --error-bg-color: #8b3a3a;
 }
 
 /* Dark theme colors — active when <html data-theme="dark"> */
@@ -24,7 +25,8 @@
   --button-bg-color: #c25e77;
   --button-hover-bg-color: #a84860;
   --button-text-color: #ffffff;
-  --error-color: #9e4444;
+  --error-color: #f87171;
+  --error-bg-color: #8b3a3a;
 }
 
 body {
