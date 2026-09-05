@@ -17,8 +17,8 @@
 
 .deleteButton {
   padding: 0.4rem 0.8rem;
-  background-color: red;
-  color: #ffffff;
+  background-color: var(--error-color);
+  color: var(--button-text-color);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -26,7 +26,7 @@
 }
 
 .deleteButton:hover {
-  background-color: darkred;
+  background-color: #9b2d2d;
 }
 
 .backButton {
