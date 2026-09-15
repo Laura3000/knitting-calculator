@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { SwatchData, CalculationResult } from "../../types/knitting.types";
+import type { SwatchData, CalculationResult, SavedProject } from "../../types/knitting.types";
 import { GaugeResult } from "./GaugeResult";
 import { NumberField } from "../form/NumberField";
 import { TextField } from "../form/TextField";
@@ -8,10 +8,14 @@ import styles from "./GaugeCalculatorForm.module.css";
 
 interface GaugeCalculatorFormProps {
   onSaveProject: (data: SwatchData, result: CalculationResult) => boolean;
+  editingProject?: SavedProject | null;
+  onCancelEdit?: () => void;
 }
 
 export function GaugeCalculatorForm({
   onSaveProject,
+  editingProject,
+  onCancelEdit,
 }: GaugeCalculatorFormProps) {
   const {
     projectName,
@@ -37,11 +41,14 @@ export function GaugeCalculatorForm({
     lastData,
     handleSubmit,
     handleReset,
-  } = useSwatchForm();
+  } = useSwatchForm(editingProject?.data);
 
   // Tracks whether the current result has already been saved,
   // just so we can show a small confirmation on the button.
   const [saved, setSaved] = useState(false);
+  const editingNotice = editingProject ? (
+    <p>Editing project: <strong>{editingProject.data.projectName || "Untitled project"}</strong></p>
+  ) : null;
 
   function handleSave() {
     if (!lastData || !result) {
@@ -58,6 +65,7 @@ export function GaugeCalculatorForm({
   if (result) {
     return (
       <div className={styles.container}>
+        {editingNotice}
         <GaugeResult
           projectName={projectName}
           result={result}
@@ -71,10 +79,10 @@ export function GaugeCalculatorForm({
             onClick={handleSave}
             disabled={saved}
           >
-            {saved ? "Saved!" : "Save project"}
+            {saved ? "Saved!" : editingProject ? "Save Changes" : "Save project"}
           </button>
-          <button className={styles.button} onClick={handleResetAndClearSaved}>
-            Start over
+          <button className={styles.button} onClick={editingProject ? onCancelEdit : handleResetAndClearSaved}>
+            {editingProject ? "Cancel editing" : "Start over"}
           </button>
         </div>
       </div>
@@ -84,6 +92,7 @@ export function GaugeCalculatorForm({
   return (
     <form className={styles.container} noValidate onSubmit={(event) => { event.preventDefault(); handleSubmit(); }}>
       <h2>Your swatch &amp; measurements</h2>
+      {editingNotice}
 
       <TextField
         label="Project name"
@@ -150,6 +159,11 @@ export function GaugeCalculatorForm({
         <button className={styles.button} type="submit">
           Calculate
         </button>
+        {editingProject && (
+          <button className={styles.button} type="button" onClick={onCancelEdit}>
+            Cancel editing
+          </button>
+        )}
       </div>
 
       {errors.length > 0 && (

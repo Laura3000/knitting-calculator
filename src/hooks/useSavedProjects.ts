@@ -8,6 +8,7 @@ import {
   getSavedProjects,
   saveProject,
   deleteProject,
+  updateProject as updateStoredProject,
 } from "../utils/projectStorage";
 
 export function useSavedProjects() {
@@ -16,7 +17,10 @@ export function useSavedProjects() {
     try {
       return { projects: getSavedProjects(), error: "" };
     } catch (error) {
-      return { projects: [] as SavedProject[], error: storageErrorMessage(error) };
+      return {
+        projects: [] as SavedProject[],
+        error: storageErrorMessage(error),
+      };
     }
   });
   const [projects, setProjects] = useState(initialLoad.projects);
@@ -48,6 +52,16 @@ export function useSavedProjects() {
     }
   }
 
+  function updateProject(id: string, data: SwatchData, result: CalculationResult) {
+    try {
+      setProjects(updateStoredProject(id, data, result));
+      return true;
+    } catch (error) {
+      window.alert(storageErrorMessage(error));
+      return false;
+    }
+  }
+
   function removeProject(id: string) {
     try {
       setProjects(deleteProject(id));
@@ -56,9 +70,11 @@ export function useSavedProjects() {
     }
   }
 
-  return { projects, addProject, removeProject };
+  return { projects, addProject, updateProject, removeProject };
 }
 
 function storageErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : "Unable to access saved projects. Please try again.";
+  return error instanceof Error
+    ? error.message
+    : "Unable to access saved projects. Please try again.";
 }

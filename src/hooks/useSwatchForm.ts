@@ -3,16 +3,16 @@ import type { SwatchData, CalculationResult } from "../types/knitting.types";
 import { calculateGauge } from "../utils/calculateGauge";
 import { validateSwatchData } from "../utils/validateSwatchData";
 
-export function useSwatchForm() {
-  const [projectName, setProjectName] = useState("");
-  const [swatchStitches, setSwatchStitches] = useState("");
-  const [swatchWidthCm, setSwatchWidthCm] = useState("");
-  const [desiredWidthCm, setDesiredWidthCm] = useState("");
-  const [swatchRows, setSwatchRows] = useState("");
-  const [swatchHeightCm, setSwatchHeightCm] = useState("");
-  const [desiredHeightCm, setDesiredHeightCm] = useState("");
-  const [yarnName, setYarnName] = useState("");
-  const [needleSize, setNeedleSize] = useState("");
+export function useSwatchForm(initialData?: SwatchData) {
+  const [projectName, setProjectName] = useState(initialData?.projectName ?? "");
+  const [swatchStitches, setSwatchStitches] = useState(String(initialData?.swatchStitches ?? ""));
+  const [swatchWidthCm, setSwatchWidthCm] = useState(String(initialData?.swatchWidthCm ?? ""));
+  const [desiredWidthCm, setDesiredWidthCm] = useState(String(initialData?.desiredWidthCm ?? ""));
+  const [swatchRows, setSwatchRows] = useState(String(initialData?.swatchRows ?? ""));
+  const [swatchHeightCm, setSwatchHeightCm] = useState(String(initialData?.swatchHeightCm ?? ""));
+  const [desiredHeightCm, setDesiredHeightCm] = useState(String(initialData?.desiredHeightCm ?? ""));
+  const [yarnName, setYarnName] = useState(initialData?.yarnName ?? "");
+  const [needleSize, setNeedleSize] = useState(initialData?.needleSize ?? "");
 
   const [errors, setErrors] = useState<string[]>([]);
   const [result, setResult] = useState<CalculationResult | null>(null);

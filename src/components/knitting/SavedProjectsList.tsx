@@ -4,12 +4,14 @@ import styles from "./SavedProjectsList.module.css";
 interface SavedProjectsListProps {
   projects: SavedProject[];
   onDelete: (id: string) => void;
+  onEdit: (project: SavedProject) => void;
   onBack: () => void;
 }
 
 export function SavedProjectsList({
   projects,
   onDelete,
+  onEdit,
   onBack,
 }: SavedProjectsListProps) {
   return (
@@ -30,19 +32,24 @@ export function SavedProjectsList({
             <p>Needle size: {project.data.needleSize}</p>
           )}
 
-          <button
-            className={styles.deleteButton}
-            aria-label={`Delete ${project.data.projectName || "untitled project"}`}
-            onClick={() => onDelete(project.id)}
-          >
-            Delete
-          </button>
+          <div className={styles.actions}>
+            <button
+              className={styles.editButton}
+              aria-label={`Edit ${project.data.projectName || "untitled project"}`}
+              onClick={() => onEdit(project)}
+            >
+              Edit
+            </button>
+            <button
+              className={styles.deleteButton}
+              aria-label={`Delete ${project.data.projectName || "untitled project"}`}
+              onClick={() => onDelete(project.id)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
-
-      <button className={styles.backButton} onClick={onBack}>
-        Back to calculator
-      </button>
     </div>
   );
 }

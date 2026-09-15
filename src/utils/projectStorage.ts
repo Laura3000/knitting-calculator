@@ -1,4 +1,4 @@
-import type { SavedProject } from "../types/knitting.types";
+import type { SavedProject, SwatchData, CalculationResult } from "../types/knitting.types";
 
 const STORAGE_KEY = "savedProjects";
 
@@ -65,6 +65,23 @@ export function saveProject(project: SavedProject): SavedProject[] {
   const currentProjects = getSavedProjects();
   const updatedProjects = [...currentProjects, project];
   
+  writeProjects(updatedProjects);
+  return updatedProjects;
+}
+
+// Updates only an existing project, keeping its original identity and save date.
+export function updateProject(
+  id: string,
+  data: SwatchData,
+  result: CalculationResult,
+): SavedProject[] {
+  const currentProjects = getSavedProjects();
+  const index = currentProjects.findIndex((project) => project.id === id);
+  if (index === -1) {
+    throw new Error("This project could not be found. No projects were changed.");
+  }
+  const updatedProjects = [...currentProjects];
+  updatedProjects[index] = { ...currentProjects[index], data, result };
   writeProjects(updatedProjects);
   return updatedProjects;
 }

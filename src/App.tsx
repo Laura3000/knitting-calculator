@@ -8,16 +8,20 @@ import { AppLayout } from "./app/AppLayout";
 import { getView, viewLabel } from "./app/navigation";
 import { Dashboard, ToolGrid } from "./features/dashboard/Dashboard";
 import styles from "./App.module.css";
+import type { SavedProject, SwatchData, CalculationResult } from "./types/knitting.types";
 
 function App() {
   const { theme, toggleTheme } = useTheme();
-  const { projects, addProject, removeProject } = useSavedProjects();
+  const { projects, addProject, updateProject, removeProject } = useSavedProjects();
   const [view, setView] = useState(getView);
+  const [editingProject, setEditingProject] = useState<SavedProject | null>(null);
 
   useEffect(() => {
     function handleNavigation() {
       if (window.location.hash === "#main-content") return;
-      setView(getView());
+      const nextView = getView();
+      setView(nextView);
+      if (nextView !== "stitch-row") setEditingProject(null);
       document.getElementById("main-content")?.focus({ preventScroll: true });
       window.scrollTo({ top: 0 });
     }
@@ -28,6 +32,23 @@ function App() {
   useEffect(() => {
     document.title = `${viewLabel(view)} · Count & Knit`;
   }, [view]);
+
+  function startEditing(project: SavedProject) {
+    setEditingProject(project);
+    window.location.hash = "stitch-row";
+  }
+
+  function finishEditing() {
+    setEditingProject(null);
+    window.location.hash = "projects";
+  }
+
+  function saveCalculation(data: SwatchData, result: CalculationResult) {
+    if (!editingProject) return addProject(data, result);
+    const saved = updateProject(editingProject.id, data, result);
+    if (saved) finishEditing();
+    return saved;
+  }
 
   const futureView = ![
     "home",
@@ -51,14 +72,19 @@ function App() {
           <ToolGrid />
         </>
       )}
-      {/* Keep the existing form mounted so navigation preserves its draft and result. */}
+      {/* Preserve new drafts across navigation; reset the form when entering or leaving editing. */}
       <div hidden={view !== "stitch-row"}>
         <div className={styles.pageHeading}>
           <span>FROM SWATCH TO STITCH</span>
           <h1>Stitch &amp; Row Calculator</h1>
           <p>From your little swatch to something lovely.</p>
         </div>
-        <GaugeCalculatorForm onSaveProject={addProject} />
+        <GaugeCalculatorForm
+          key={editingProject ? `edit:${editingProject.id}` : "new-project"}
+          editingProject={editingProject}
+          onSaveProject={saveCalculation}
+          onCancelEdit={finishEditing}
+        />
       </div>
       {view === "projects" && (
         <>
@@ -70,6 +96,7 @@ function App() {
           <SavedProjectsList
             projects={projects}
             onDelete={removeProject}
+            onEdit={startEditing}
             onBack={() => {
               window.location.hash = "stitch-row";
             }}
