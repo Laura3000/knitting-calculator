@@ -97,9 +97,6 @@ function App() {
             projects={projects}
             onDelete={removeProject}
             onEdit={startEditing}
-            onBack={() => {
-              window.location.hash = "stitch-row";
-            }}
           />
         </>
       )}

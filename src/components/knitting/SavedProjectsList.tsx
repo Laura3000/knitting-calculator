@@ -5,14 +5,12 @@ interface SavedProjectsListProps {
   projects: SavedProject[];
   onDelete: (id: string) => void;
   onEdit: (project: SavedProject) => void;
-  onBack: () => void;
 }
 
 export function SavedProjectsList({
   projects,
   onDelete,
   onEdit,
-  onBack,
 }: SavedProjectsListProps) {
   return (
     <div className={styles.container}>
