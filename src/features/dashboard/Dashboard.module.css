@@ -52,4 +52,10 @@
 @media (max-width: 1200px) { .tools { grid-template-columns: repeat(3, minmax(0, 1fr)); } .tool { min-height: 205px; } .heroArt { width: 185px; } .lowerGrid { gap: 18px; } .stats > div { gap: 8px; padding: 12px 9px; } .stats svg { width: 25px; } }
 @media (max-width: 950px) { .lowerGrid { grid-template-columns: 1fr; gap: 0; } .hero { padding: 28px; }.heroArt { width: 115px; }.heroArt > span { display: none; }.handwriting { font-size: 20px; } }
 @media (max-width: 480px) { .hero { min-height: 233px; padding: 25px 22px; }.heroArt { position: absolute; right: -38px; bottom: 10px; height: 80px; opacity: .22; }.heroArt > svg:first-of-type { width: 125px; height: 125px; }.heroArt i { display: none; }.hero p { font-size: 14px; }.eyebrow { font-size: 8px; letter-spacing: 1.5px; }.handwriting { font-size: 18px; }.tools { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }.tool { padding: 17px 13px 12px; }.tool h3 { font-size: 19px; }.sectionHeading h2 { font-size: 24px; }.statsPanel { padding: 14px; }.stats > div { gap: 10px; }.motto { font-size: 19px; } }
+@media (max-width: 480px) {
+  .section .tool { min-height: 184px; padding-block: 14px 10px; }
+  .section .tool > svg { margin-bottom: 10px; }
+  .section .tool h3 { margin-bottom: 8px; }
+  .section .tool p { margin-bottom: 10px; }
+}
 @media (prefers-reduced-motion: reduce) { .tool { transition: none; }.tool:hover { transform: none; } }

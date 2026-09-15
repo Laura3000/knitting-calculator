@@ -110,9 +110,7 @@ export function AppLayout({
         <main id="main-content" tabIndex={-1} className={styles.main}>
           {children}
         </main>
-        <footer className={styles.footer}>
-          Made for slow moments &amp; beautiful things. <Icon name="heart" />
-        </footer>
+        <footer className={styles.footer}>For projects worth keeping.</footer>
       </div>
     </div>
   );

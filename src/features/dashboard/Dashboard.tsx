@@ -116,7 +116,7 @@ export function Dashboard({ projects }: { projects: SavedProject[] }) {
           <div className={styles.tip}>
             <Icon name="stitch" />
             <p>
-              <strong>A little care goes a long way.</strong>
+              <strong>A swatch today, fewer surprises tomorrow.</strong>
               <br />
               Make a swatch before you begin. Your future stitches will thank
               you.
@@ -169,7 +169,7 @@ export function Dashboard({ projects }: { projects: SavedProject[] }) {
             counted here.
           </p>
           <blockquote className={styles.motto}>
-            “Progress, not perfection.” <Icon name="heart" />
+            “Plan a little. Knit a lot.”
           </blockquote>
         </section>
       </div>
