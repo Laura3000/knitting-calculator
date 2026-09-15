@@ -10,15 +10,15 @@ export function validateSwatchData(data: {
 }): string[] {
   const errors: string[] = [];
 
-  if (!data.swatchStitches || data.swatchStitches <= 0) {
+  if (!Number.isFinite(data.swatchStitches) || data.swatchStitches <= 0) {
     errors.push("Enter how many stitches you knitted in the swatch.");
   }
 
-  if (!data.swatchWidthCm || data.swatchWidthCm <= 0) {
+  if (!Number.isFinite(data.swatchWidthCm) || data.swatchWidthCm <= 0) {
     errors.push("Enter the swatch width (greater than zero).");
   }
 
-  if (!data.desiredWidthCm || data.desiredWidthCm <= 0) {
+  if (!Number.isFinite(data.desiredWidthCm) || data.desiredWidthCm <= 0) {
     errors.push("Enter the desired width (greater than zero).");
   }
 
@@ -35,6 +35,10 @@ export function validateSwatchData(data: {
 
   if (filledHeightFields.length > 0 && filledHeightFields.length < 3) {
     errors.push("To calculate height, fill in all three rows/height fields.");
+  }
+
+  if (filledHeightFields.some((field) => !Number.isFinite(field) || field <= 0)) {
+    errors.push("Rows and height values must be finite numbers greater than zero.");
   }
 
   return errors;

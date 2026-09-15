@@ -7,7 +7,7 @@ import { useSwatchForm } from "../../hooks/useSwatchForm";
 import styles from "./GaugeCalculatorForm.module.css";
 
 interface GaugeCalculatorFormProps {
-  onSaveProject: (data: SwatchData, result: CalculationResult) => void;
+  onSaveProject: (data: SwatchData, result: CalculationResult) => boolean;
 }
 
 export function GaugeCalculatorForm({
@@ -47,8 +47,7 @@ export function GaugeCalculatorForm({
     if (!lastData || !result) {
       return;
     }
-    onSaveProject(lastData, result);
-    setSaved(true);
+    setSaved(onSaveProject(lastData, result));
   }
 
   function handleResetAndClearSaved() {
