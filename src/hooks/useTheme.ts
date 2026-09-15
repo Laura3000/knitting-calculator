@@ -6,8 +6,11 @@ export function useTheme() {
   // Lazy initializer: this function only runs once, on the first render,
   // to check if there's already a saved preference in localStorage.
   const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "light" ? "light" : "dark";
+    try {
+      return localStorage.getItem("theme") === "dark" ? "dark" : "light";
+    } catch {
+      return "light";
+    }
   });
 
   // This effect runs after every render where `theme` has changed
@@ -15,7 +18,11 @@ export function useTheme() {
   // It applies the theme to the <html> tag and saves the choice.
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      // The theme still works for this session if storage is unavailable.
+    }
   }, [theme]);
 
   function toggleTheme() {

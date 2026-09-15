@@ -20,7 +20,7 @@ export function SavedProjectsList({
 
       {projects.map((project) => (
         <div key={project.id} className={styles.projectCard}>
-          <h3>{project.data.projectName}</h3>
+          <h3>{project.data.projectName || "Untitled project"}</h3>
           <p>Required stitches: {project.result.requiredStitches}</p>
           {project.result.requiredRows !== undefined && (
             <p>Required rows: {project.result.requiredRows}</p>
@@ -32,6 +32,7 @@ export function SavedProjectsList({
 
           <button
             className={styles.deleteButton}
+            aria-label={`Delete ${project.data.projectName || "untitled project"}`}
             onClick={() => onDelete(project.id)}
           >
             Delete
@@ -40,7 +41,7 @@ export function SavedProjectsList({
       ))}
 
       <button className={styles.backButton} onClick={onBack}>
-        Back
+        Back to calculator
       </button>
     </div>
   );

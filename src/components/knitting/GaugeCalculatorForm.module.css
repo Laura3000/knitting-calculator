@@ -1,73 +1,11 @@
-.container {
-  width: 460px;
-  max-width: 90vw;
-  padding: 1.25rem;
-  background-color: var(--card-bg-color);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.container h3 {
-  text-align: center;
-  margin: 0.75rem 0 0.5rem;
-}
-
-.container h2 {
-  text-align: center;
-  margin: 0 0 1rem;
-}
-
-.row {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 0.75rem;
-}
-
-.materialsRow {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-}
-
-.materialsRow > * {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.button {
-  padding: 0.6rem 1.2rem;
-  margin-top: 1rem;
-  background-color: var(--button-bg-color);
-  color: var(--button-text-color);
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: var(--button-hover-bg-color);
-  /* color: #ffffff; */
-}
-
-.errorList {
-  color: var(--error-color);
-  font-size: 0.875rem;
-  margin-top: 1rem;
-  padding-left: 1.2rem;
-}
-
-.buttonWrapper {
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
+﻿.container { width: 100%; max-width: 740px; padding: clamp(20px, 4vw, 36px); background: var(--card-bg-color); border: 1px solid var(--border-color); border-radius: 19px; box-shadow: 0 5px 22px #342c2805; overflow-wrap: anywhere; }
+.container h2 { font-size: 27px; font-weight: 500; margin: 0 0 24px; }
+.container h3 { font-size: 21px; font-weight: 500; margin: 28px 0 14px; }
+.row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 18px; }
+.materialsRow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 18px; }
+.button { min-height: 44px; padding: 12px 22px; background: var(--button-bg-color); color: var(--button-text-color); border: 0; border-radius: 24px; font-size: 14px; font-weight: 500; cursor: pointer; }
+.button:hover { background: var(--button-hover-bg-color); }
+.errorList { color: var(--error-color); font-size: 13px; line-height: 1.8; margin-top: 20px; padding-left: 20px; }
+.buttonWrapper { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.button:disabled { opacity: .65; cursor: not-allowed; }
+@media (max-width: 480px) { .row, .materialsRow { grid-template-columns: 1fr; gap: 15px; }.buttonWrapper > button { flex: 1; } }

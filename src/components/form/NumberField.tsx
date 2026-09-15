@@ -12,6 +12,8 @@ export function NumberField({ label, value, onChange }: NumberFieldProps) {
       <span className={styles.label}>{label}</span>
       <input
         type="number"
+        step="any"
+        inputMode="decimal"
         className={styles.input}
         value={value}
         onChange={(e) => onChange(e.target.value)}

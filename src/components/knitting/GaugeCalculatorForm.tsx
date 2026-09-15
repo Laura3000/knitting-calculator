@@ -82,8 +82,8 @@ export function GaugeCalculatorForm({
   }
 
   return (
-    <div className={styles.container}>
-      <h2>Knitting Gauge Calculator</h2>
+    <form className={styles.container} noValidate onSubmit={(event) => { event.preventDefault(); handleSubmit(); }}>
+      <h2>Your swatch &amp; measurements</h2>
 
       <TextField
         label="Project name"
@@ -147,18 +147,18 @@ export function GaugeCalculatorForm({
       </div>
 
       <div className={styles.buttonWrapper}>
-        <button className={styles.button} onClick={handleSubmit}>
+        <button className={styles.button} type="submit">
           Calculate
         </button>
       </div>
 
       {errors.length > 0 && (
-        <ul className={styles.errorList}>
+        <ul className={styles.errorList} role="alert">
           {errors.map((error) => (
             <li key={error}>{error}</li>
           ))}
         </ul>
       )}
-    </div>
+    </form>
   );
 }

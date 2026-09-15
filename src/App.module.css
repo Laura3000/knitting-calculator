@@ -1,49 +1,9 @@
-.page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 1rem;
-  gap: 1rem;
-}
-
-.header {
-  width: 100%;
-  max-width: 460px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 1rem;
-  gap: 1rem;
-}
-
-.header {
-  width: 100%;
-  max-width: 460px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.linkButton {
-  background-color: var(--button-bg-color);
-  border: 1px solid var(--border-color);
-  color: var(--button-text-color);
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.875rem;
-}
-
-.linkButton:hover {
-  background-color: var(--button-hover-bg-color);
-  color: var(--button-text-color);
-}
+﻿.pageHeading { margin: 14px 0 28px; }
+.pageHeading > span { font-size: 10px; letter-spacing: 2px; color: var(--accent); }
+.pageHeading h1 { font-size: clamp(29px, 4vw, 42px); font-weight: 500; margin: 12px 0; letter-spacing: -.8px; }
+.pageHeading p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+.comingSoon { max-width: 650px; margin: 45px auto; padding: 48px 25px; text-align: center; border: 1px solid var(--border-color); border-radius: 22px; background: var(--card-bg-color); }
+.comingIcon { display: grid; place-items: center; width: 86px; height: 86px; background: var(--sage); border-radius: 50%; margin: 0 auto 23px; color: var(--accent); }.comingIcon svg { width: 48px; height: 48px; stroke-width: 1; }
+.badge { font-size: 11px; color: var(--accent); background: var(--rose); border-radius: 20px; padding: 6px 12px; }
+.comingSoon h1 { font-size: 35px; font-weight: 500; }.comingSoon p { color: var(--muted); font-size: 14px; line-height: 1.8; }
+.comingSoon a { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-size: 13px; padding: 14px; margin-top: 10px; }.comingSoon a svg { width: 17px; }

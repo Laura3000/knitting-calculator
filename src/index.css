@@ -1,46 +1,51 @@
-/* Basic reset: browsers add default margin/padding that we don't want */
-* {
-  box-sizing: border-box;
-}
-
-/* Light theme (default) colors */
+﻿* { box-sizing: border-box; }
 :root {
-  --bg-color: #f4f4f5;
-  --card-bg-color: #cfcfcf;
-  --text-color: #1a1a1a;
-  --border-color: #5c5c5c;
-  --button-bg-color: #c25e77;
-  --button-hover-bg-color: #a84860;
-  --button-text-color: #ffffff;
-  --error-color: #9e2a2b;
-  --error-bg-color: #8b3a3a;
+  color-scheme: light;
+  --bg-color: #faf7f3;
+  --sidebar-bg: #f4eee8;
+  --card-bg-color: #fffcf8;
+  --soft-bg: #f1eae3;
+  --text-color: #342c28;
+  --muted: #70645c;
+  --accent: #98544f;
+  --border-color: #ded2c8;
+  --button-bg-color: #a05a56;
+  --button-hover-bg-color: #844440;
+  --button-text-color: #fff;
+  --error-color: #a02f35;
+  --error-bg-color: #983c43;
+  --rose: #f2e0da;
+  --sage: #e8e9df;
+  --peach: #f5e6d3;
+  --blue: #e2eaed;
+  --lavender: #ebe4ed;
 }
-
-/* Dark theme colors — active when <html data-theme="dark"> */
 [data-theme="dark"] {
-  --bg-color: #646363;
-  --card-bg-color: #2a2a2a;
-  --text-color: #ffffff;
-  --border-color: #555555;
-  --button-bg-color: #c25e77;
-  --button-hover-bg-color: #a84860;
-  --button-text-color: #ffffff;
-  --error-color: #f87171;
-  --error-bg-color: #8b3a3a;
+  color-scheme: dark;
+  --bg-color: #252220;
+  --sidebar-bg: #2c2724;
+  --card-bg-color: #302b28;
+  --soft-bg: #39312c;
+  --text-color: #f4eae1;
+  --muted: #c8b9ad;
+  --accent: #e8ada3;
+  --border-color: #584b43;
+  --button-bg-color: #a35b57;
+  --button-hover-bg-color: #904d49;
+  --error-color: #ffacae;
+  --error-bg-color: #983c43;
+  --rose: #493430;
+  --sage: #363b30;
+  --peach: #45392b;
+  --blue: #303c43;
+  --lavender: #3d3442;
 }
-
-body {
-  margin: 0;
-  font-family:
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-
-  /* Smooth transition when switching themes */
-  transition:
-    background-color 0.2s,
-    color 0.2s;
-}
+body { margin: 0; min-width: 280px; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg-color); color: var(--text-color); -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; overflow-wrap: anywhere; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+svg { flex-shrink: 0; }
+button, a, input { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+[hidden] { display: none !important; }
+::selection { background: var(--rose); color: var(--text-color); }
